@@ -1,0 +1,12 @@
+/* style.css */
+body{
+    font-size: 90px;
+}
+h2{
+    color:coral;
+}
+p{
+    font-size: 0.2em;
+    /* 원본의 0.2배 */
+    line-height:2.0;
+}
