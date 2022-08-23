@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* div를 기준으로 자식요소 p를 가지고옴  */
+        div>p {
+            color: red;
+        }
+
+        /* p태그의 인접한 span 태그 선택. */
+        p+span {
+            color: blue;
+        }
+
+        p~span {
+            /* p태그 형제(sibling) 태그. */
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- div>p*3 -->
+    <div>
+        <p></p>
+        <span class="first"></span>
+    </div>
+    <h1>Heading</h1>
+    <!-- div>p{paragraph1}+p{paragraph2}+span>p{paragraph3} -->
+    <div>
+        <p>paragraph1</p>
+        <p>paragraph2</p>
+        <span>
+            <p>paragraph3</p>
+        </span>
+        <span>
+            span1
+        </span>
+        <div>div</div>
+        <span>span</span>
+    </div>
+    <p>paragraph4</p>
+</body>
+
+</html>
