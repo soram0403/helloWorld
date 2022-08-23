@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>table.html</title>
+</head>
+
+<body>
+    <a href="#hong">홍길동의 자기소개</a>
+    <a href="#frequent">자주가는 사이트</a>
+
+    <h3>학생 점수</h3>
+    <table border="1">
+        <tbody>
+            <tr>
+                <td>title부분</td>
+                <th>이름</th>
+                <th>영어</th>
+                <th>수학</th>
+                <th>합계</th>
+            </tr>
+            <tr>
+                <td rowspan="2">data부분</td>
+                <td>홍길동</td>
+                <td>80</td>
+                <td>77</td>
+                <td>157</td>
+            </tr>
+            <tr>
+                <td>김민수</td>
+                <td>88</td>
+                <td>75</td>
+                <td>163</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>footer부분</td>
+                <td colspan="4">3학년 9반 점수리스트</td>
+            </tr>
+        </tfoot>
+    </table>
+    <br>
+    <figure>
+
+        <table border="1" id="hong">
+            <caption>홍길동의 자기소개</caption> <!-- 캡션은 항상 상단에만 -->
+            <tr>
+                <td>이름</td>
+                <td>홍길동</td>
+                <td>연락처</td>
+                <td>010-1234-5678</td>
+                <td>사진</td>
+            </tr>
+            <tr>
+                <td>주소</td>
+                <td colspan="3">대구 중구 중앙대로길 100</td>
+                <td rowspan="2"><a href="../profile/hong.html"><img src="../img/hong.png" alt="홍길동의 증명사진입니다."
+                            width="80px"></a></td>
+            </tr>
+            <tr>
+                <td>자기소개</td>
+                <td colspan="3">프로그램을 공부하는 학생.</td>
+            </tr>
+        </table>
+        <figcaption style="padding-left: 15%;">홍길동의 자기소개입니다.</figcaption>
+    </figure>
+    <br>
+    <table border="1" id="frequent">
+        <caption>자주가는 site</caption>
+        <tr>
+            <th>사이트명</th>
+            <th>url</th>
+            <th>설명</th>
+            <th>로고</th>
+        </tr>
+        <tr>
+            <td>다음</td>
+            <td><a target="_blank" href="https://www.daum.net">www.daum.net</a></td>
+            <td>다음 사이트 주소입니다.</td>
+            <td><a target="_blank" href="https://www.daum.net">
+                    <img src="../img/daum.png" alt="다음 로고입니다." width="90px">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>Google</td>
+            <td><a target="_blank" href="https://www.google.com">www.google.com</a></td>
+            <td>구글 검색엔진입니다.</td>
+            <td><a target="_blank" href="https://www.google.com">
+                    <img src="../img/google.png" alt="구글 로고입니다." width="90px">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>Naver</td>
+            <td><a target="_self" href="https://www.naver.com">www.naver.com</a></td>
+            <td>네이버 페이지입니다.</td>
+            <td><a target="_self" href="https://www.naver.com">
+                    <img src="../img/naver.png" alt="네이버 로고입니다." width="90px">
+                </a>
+            </td>
+        </tr>
+    </table>
+    <a href="../AddBankMemberServlet?id=user1&pw=1234&name=김사용&role=0"> bank 멤버 추가하기.</a>
+    <a href="https://developer.mozilla.org/ko/docs/Web/HTML#key_resources" target="_blank">mdn의 중요한 자료</a>
+    <a href="https://developer.mozilla.org/ko/docs/Web/HTML#beginners_tutorials" target="_blank">mdn의 초보자 학습서</a>
+    <br>
+
+    <img style="width: 200px;" src="../img/hong.png" alt="" usemap="#favorites">
+    <map name="favorites">
+        <area shape="rect" coords="50,50,100,100" href="https://www.daum.net" alt="" target="_blank">
+        <area shape="rect" coords="150,150,200,200" href="https://www.naver.com" alt="" target="_blank">
+    </map>
+
+<p>Lorem</p>
+ipsum, dolor <br>
+sit amet consectetur <br>
+adipisicing elit. <br>
+Commodi repellendus <br>
+nemo aliquid <br>
+corrupti <br>
+fugit, aliquam <br>
+cum illo <br>
+impedit nobis neque <br>
+praesentium possimus <br>
+aut eos cumque dolorum, <br>
+officia, provident <br>
+deserunt itaque. <br>
+
+</body>
+
+</html>

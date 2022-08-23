@@ -5,11 +5,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>타이틀부분</title>
+    <style>
+        h3 {
+            color: red;
+            background-color: yellow;
+        }
+
+        h4 {
+            color: yellow;
+        }
+        #first{
+            background-color: red;
+        }
+        #second{
+            color: red;
+        }
+        .first{
+            font-style: italic;
+        }
+    </style>
 </head>
 
 <body>
-    <h3>첫번째 페이지입니다.</h3>
+    <h3 class="first">첫번째 페이지입니다.</h3>
+    <h4 id="first">여기는 내용입니다.</h4><!-- 배경을 빨간색-->
+    <img src="first.PNG" alt="예쁜이미지입니다." width="210">
+    <h4 id="second" class="first">두번째 내용입니다.</h4><!-- 폰트를 빨간색-->
+
+    <script>
+        let hello = 'good';
+        console.log(hello);
+    </script>
 </body>
 
 </html>
