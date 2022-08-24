@@ -4,6 +4,16 @@ article {
     padding: 20px;
     margin: auto
 }
+header>h1 {
+    width:35%;
+    float:left;
+    margin-left: 20px;
+}
+header>nav {
+    width:55%;
+    float:right;
+    margin-left: 20px;
+}
 h1,nav, ul {
     display: inline;
 }

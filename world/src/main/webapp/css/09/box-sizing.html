@@ -8,8 +8,8 @@
     <title>Document</title>
     <style>
         div {
-            width: 300px;
-            height: 150px;
+            width: 270px;
+            height: 130px;
             margin: 10px;
             border: 5px solid lightblue;
             padding: 10px;
@@ -22,10 +22,11 @@
 
         .box2 {
             box-sizing: content-box;
+            display: inline-block;
         }
         #first {
             width: 650px;
-            height: 170px;
+            height: 340px;
             border: 2px dotted cadetblue;
         }
     </style>
@@ -35,9 +36,11 @@
     <div id="first">
         <div class="box1">border-box</div>
         <div class="box1">border-box</div>
+        <div class="box2">content-box</div>
+        <div class="box2">content-box</div>
 
     </div>
-    <div class="box2">content-box</div>
+    <!-- <div class="box2">content-box</div> -->
 </body>
 
 </html>
