@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <title>배경 이미지</title>
+  <style>
+    div {
+      /* background-origin 속성. */
+      width: 400px;
+      height: 250px;
+      border: 15px solid gray;
+      padding: 35px;
+      margin-top: 15px;
+      background-image: url(images/bg3.jpg);
+      background-repeat: no-repeat;
+    }
+
+    .bg1 {
+      background-origin: padding-box;
+    }
+
+    .bg2 {
+      background-origin: content-box;
+    }
+
+    .bg3 {
+      background-origin: border-box;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="bg1"></div>
+  <div class="bg2"></div>
+  <div class="bg3"></div>
+</body>
+
+</html>

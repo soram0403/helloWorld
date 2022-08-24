@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="utf-8">
+	<title>원형 그러데이션</title>
+	<style>
+		ul>li {
+			margin-top: 10px;
+		}
+		#div1 {
+			background: darkgreen;
+			list-style: none;
+			width: 100px;
+			height: 100px;		
+			background: radial-gradient(circle closest-side at 30% 40%, white, yellow, green);
+		}
+		#div2 {
+			background: darkgreen;
+			list-style: none;
+			width: 100px;
+			height: 100px;		
+			background: radial-gradient(circle closest-corner at 30% 40%, white, yellow, green);
+		}
+		#div3 {
+			background: darkgreen;
+			list-style: none;
+			width: 100px;
+			height: 100px;		
+			background: radial-gradient(circle farthest-side at 30% 40%, white, yellow, green);
+		}
+		#div4 {
+			background: darkgreen;
+			list-style: none;
+			width: 100px;
+			height: 100px;		
+			background: radial-gradient(circle farthest-corner at 30% 40%, white, yellow, green);
+		}
+	</style>
+</head>
+
+<body>
+	<ul>
+		<li id="div1"></li>
+		<li id="div2"></li>
+		<li id="div3"></li>
+		<li id="div4"></li>
+	</ul>
+</body>
+
+</html>

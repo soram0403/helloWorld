@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css/struct_selector.html</title>
+    <style>
+        /* 구조적 가상 선택자 */
+        ol>li:nth-child(3) {
+            color: yellowgreen;
+        }
+        ol>li:last-child{
+            border: 1px solid yellowgreen;
+        }
+        /* ol하위의 li에서 뒤에서 부터 (n)번째 */
+        ol>li:nth-last-child(2){
+            color: darkcyan;
+        }
+        /* ()안에 연산식 가능 n=0,1,2*/
+        ul>li:nth-child(2n+1){
+            background-color: yellowgreen;
+        }
+        /* 뒤에서부터 순번을~~ */
+        ul>li:nth-last-child(2n+1){
+            color: darkcyan;
+        }
+    </style>
+</head>
+<body>
+    <ol>
+        <li>Espresso</li>
+        <li>Americano</li>
+        <li>Caffe Latte</li>
+        <li>Caramel Latte</li>
+        <li>Caffe Moka</li>
+        <li>Cappuchino</li>
+    </ol>
+
+    <ul>
+        <li>Espresso</li>
+        <li>Americano</li>
+        <li>Caffe Latte</li>
+        <li>Caramel Latte</li>
+        <li>Caffe Moka</li>
+        <li>Cappuchino</li>
+    </ul>
+</body>
+</html>
