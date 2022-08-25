@@ -14,7 +14,7 @@ header>nav {
     float:right;
     margin-left: 20px;
 }
-h1,nav, ul {
+nav, ul {
     display: inline;
 }
 header {

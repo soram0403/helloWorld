@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코로나19 예방접종</title>
+    <style>
+        h2 {
+            margin: 2%;
+        }
+
+        caption {
+            font-size: x-large;
+            font-weight: 500;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        span {
+            font-size: small;
+        }
+
+        .table1,
+        .table2 {
+            width: 95%;
+            margin: 5% 2%;
+            border-collapse: collapse;
+            border-bottom: 0.2px solid lightgray;
+            border-left: 0.2px solid lightgray;
+            border-right: 0.2px solid lightgray;
+            padding: 5px 7px;
+            border-top: 1px solid black;
+        }
+
+        .table1 td,
+        th {
+            border-bottom: 0.2px solid lightgray;
+            border-left: 0.2px solid lightgray;
+            border-right: 0.2px solid lightgray;
+            padding: 5px 7px;
+            
+        }
+
+        .top,
+        .top1,
+        .top2 {
+            background-color: rgba(127, 255, 212, 0.2);
+        }
+
+        .table2 td,
+        th {
+            border-bottom: 0.2px solid lightgray;
+            border-left: 0.2px solid lightgray;
+            border-right: 0.2px solid lightgray;
+            padding: 5px 7px;
+        }
+
+        .top3> th{
+            color: rgb(73, 93, 158);
+            font-weight: bold;
+            border-bottom: 1px dotted rgba(73, 93, 158);
+        }
+        .top3> td{
+            color: rgb(73, 93, 158);
+            font-weight: bold;
+            border-bottom: 1px dotted rgba(73, 93, 158);
+        }
+
+        td {
+            text-align: right;
+        }
+
+        caption.bottom {
+            font-size: small;
+            caption-side: bottom;
+        }
+
+        span#bottom {
+            font-size: 14px;
+        }
+
+        div.blue {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            font-size: 15px;
+            color: #fff;
+            line-height: 20px;
+            text-align: center;
+            background: rgb(74, 105, 206)
+        }
+        div.red {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            font-size: 15px;
+            color: #fff;
+            line-height: 20px;
+            text-align: center;
+            background: rgb(228, 73, 73)
+        }
+    </style>
+</head>
+
+<body>
+    <h2>시도별 일일 접종 현황</h2>
+    <hr>
+    <table class="table1">
+        <caption id="caption1">접종실적 총괄 <span>( 08.25., 00시 기준)</span></caption>
+        <tr class="top">
+            <th>구분</th>
+            <th>1차접종</th>
+            <th>2차접종</th>
+            <th>3차접종</th>
+            <th>4차접종</th>
+        </tr>
+        <tr>
+            <th>당일 누적 <div class="blue">A</div> + <div class="red">B</div>
+            </th>
+            <td>45,101,931</td>
+            <td>44,664,114</td>
+            <td>33,539,624</td>
+            <td>7,000,206</td>
+        </tr>
+        <tr>
+            <th>당일 실적 <div class="blue">A</div>
+            </th>
+            <td>380</td>
+            <td>336</td>
+            <td>2,350</td>
+            <td>32,088</td>
+        </tr>
+        <tr>
+            <th>전일 누적 <div class="red">B</div>
+            </th>
+            <td>45,101,551</td>
+            <td>44,663,778</td>
+            <td>33,537,319</td>
+            <td>6,968,118</td>
+        </tr>
+    </table>
+
+    <table class="table2">
+        <caption>시도별 접종 현황</caption>
+        <tr class="top1">
+            <th rowspan="2">구분</th>
+            <th colspan="2">1차접종</th>
+            <th colspan="2">2차접종</th>
+            <th colspan="2">3차접종</th>
+            <th colspan="2">4차접종</th>
+        </tr>
+        <tr class="top2">
+            <th>당일 실적</th>
+            <th>당일 누계</th>
+            <th>당일 실적</th>
+            <th>당일 누계</th>
+            <th>당일 실적</th>
+            <th>당일 누계</th>
+            <th>당일 실적</th>
+            <th>당일 누계</th>
+        </tr>
+        <tr class="top3">
+            <th>합계</th>
+            <td>380</td>
+            <td>45,101,937</td>
+            <td>336</td>
+            <td>44,664,114</td>
+            <td>2,305</td>
+            <td>33,539,624</td>
+            <td>32,088</td>
+            <td>7,000,206</td>
+        </tr>
+        <tr>
+            <th>서울</th>
+            <td>72</td>
+            <td>8,340,082</td>
+            <td>68</td>
+            <td>8,260,864</td>
+            <td>506</td>
+            <td>6,049,408</td>
+            <td>5,590</td>
+            <td>1,165,344</td>
+        </tr>
+        <tr>
+            <th>부산</th>
+            <td>72</td>
+            <td>8,340,082</td>
+            <td>68</td>
+            <td>8,260,864</td>
+            <td>506</td>
+            <td>6,049,408</td>
+            <td>5,590</td>
+            <td>1,165,344</td>
+        </tr>
+        <tr>
+            <th>대구</th>
+            <td>72</td>
+            <td>8,340,082</td>
+            <td>68</td>
+            <td>8,260,864</td>
+            <td>506</td>
+            <td>6,049,408</td>
+            <td>5,590</td>
+            <td>1,165,344</td>
+        </tr>
+        <caption class="bottom"> <img src="images/star.png" alt="" style="width: 10px;"> 상기 통계자료는 예방접종등록에 따라 변동 가능한 잠정 통계임</caption>
+    </table>
+    <img src="images/gong.png" alt="">
+    <span id="bottom">코로나19 백신 및 예방접종이 창작한 <b>"예방접종현황"</b> 저작물은 공공누리의 <b>제1유형 (출처표시, 상업적 이용가능, 변경 가능)</b>조건에 따라 이용할 수
+        있습니다.</span>
+
+</body>
+
+</html>
