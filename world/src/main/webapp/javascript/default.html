@@ -1,14 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="./js/loop.js"></script>
 
 </head>
+
 <body>
-    
+    <input type="number" name="num1" id="num1" value="30"> +
+    <input type="number" name="num2" id="num2" value="50"> =
+    <input type="number" name="result" id="result" value=""><br>
+    <button onclick="calc()">계산</button>
+
+
+    <script>
+        // let val = document.querySelector('input[type="number"]').value;
+        // let val2 = document.querySelector('#num2').value;
+        // console.log(typeof val, val);
+        // console.log(parseInt(val) + parseInt(val2));
+        function calc(){
+            // num1, num2 합 결과 result
+            let val1 = document.querySelector('#num1').value;
+            let val2 = document.querySelector('#num2').value;
+            result = parseInt(val1) + parseInt(val2);
+            document.querySelector('#result').value = result;
+
+            // 비워주기
+            document.querySelector('#num1').value = '';
+            document.querySelector('#num2').value = '';
+            document.querySelector('#num1').focus();
+            
+        }
+    </script>
+    <script src="./js/for_test2.js"></script>
 </body>
+
 </html>
