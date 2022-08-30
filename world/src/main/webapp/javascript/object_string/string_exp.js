@@ -10,11 +10,12 @@ console.log(`0${now.getSeconds()}`.slice(-2));
 console.log('abc'.toUpperCase());
 console.log('ABC'.toLowerCase());
 
-Date.prototype.hhmiss = function {
+Date.prototype.hhmiss = function() {
     // 09:08:07 (시:분:초) 표현하는 함수
-    now.getHours();
-    now.getMinutes();
-    now.getSeconds();
+    let hh = now.getHours()<10?'0'+now.getHours():now.getHours();
+    let mi = now.getMinutes()<10?'0'+now.getMinutes():now.getMinutes();
+    let ss = now.getSeconds()<10?'0'+now.getSeconds():now.getSeconds();
+    return `${hh}:${mi}:${ss}`;
 }
 
 console.log(now.hhmiss());
