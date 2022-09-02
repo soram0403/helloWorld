@@ -6,16 +6,43 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>javascript/ajax.html</title>
+<style>
+	#list tr td:nth-child(1) {
+		width: 80px;
+		text-align: center;
+	}
+
+	#list tr td:nth-child(2), #list tr td:nth-child(3) {
+		width: 110px;
+		background-color: beige;
+		padding-left:5px;
+}
+</style>
 </head>
 
 <body>
+	<h3>회원입력</h3>
+	<label for="mem_id">회원아이디</label>
+	<input type="text" id="mem_id">
+	<br>
+	<label for="mem_pw">회원비밀번호</label>
+	<input type="text" id="mem_pw">
+	<br>
+	<label for="mem_name">회원이름</label>
+	<input type="text" id="mem_name">
+	<br>
+	<button id="addBtn">회원등록</button>
+	<hr>
 	<div id="show">
 		<table border="1">
 			<thead>
 				<tr>
 					<th>아이디</th>
 					<th>이름</th>
-					<th>연락처</th>
+					<th>비밀번호</th>
+					<th>삭제</th>
+					<th>수정</th>
+
 				</tr>
 			</thead>
 			<tbody id="list">
@@ -23,64 +50,181 @@
 			</tbody>
 		</table>
 	</div>
+
+	<table id="template" style="display: none;">
+		<tbody>
+			<tr>
+				<td id="id">user1</td>
+				<td><input type="text" id="name" value="name1"></td>
+				<td><input type="number" id="passwd" value="pass1"></td>
+				<td><button disabled>삭제</button></td>
+				<td><button onclick="modifyMember(event)">변경</button></td>
+			</tr>
+		</tbody>
+	</table>
+
+
 	<script>
-        // 서버상에 있는 html, jsp, 서블릿.
-        let xhtp = new XMLHttpRequest();
-        xhtp.open('get','../MemberListServlet');
-        xhtp.send(); // 서버요청
-        xhtp.onload = function(){
-        	let data = JSON.parse(xhtp.response);
-            console.log(data);
-            let list = document.getElementById('list');
-            // 서버의 json파일 -> JSON.parse() /파싱/ -> 페이지 출력.
-            data.forEach(data=>{
-            	
-            	let tr = document.createElement('tr');
-                
-                let td = document.createElement('td');
-                let txt = document.createTextNode(data.memberId);
-                td.appendChild(txt); // id
-                
-                let td2 = document.createElement('td');
-                let txt2 = document.createTextNode(data.memberName);
-                td2.appendChild(txt2); // first_name
-                
-                let td3 = document.createElement('td');
-                let txt3 = document.createTextNode(data.memberPw);
-                td3.appendChild(txt3); // password
-                
-                let td4 = document.createElement('td');
-                let btn = document.createElement('button');
-                
-                // 삭제 이벤트 : ajax 호출.
-                btn.addEventListener('click', function(){
-                	let delAjax = new XMLHttpRequest();
-                	delAjax.open('post','../MemberListServlet') // (요청방식,요청페이지)
-                	delAjax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                	delAjax.send('del_id=' + this.parentElement.parentElement.firstElementChild.textContent);
-                	delAjax.onload = function (e) {
-                		let result = delAjax.responseText;
-                		console.log(result);
-                		if(result == 'success'){
-                			btn.parentElement.parentElement.remove();
-                		} else {
-                			alert('처리중 에러발생.');
-                		}
-                	}
-                })
-                
-                let txt4 = document.createTextNode('삭제');
-                btn.appendChild(txt4);
-                td4.appendChild(btn); // 삭제버튼
-                
-                
-                tr.append(td, td2, td3, td4); // append는 한꺼번에 입력 가능, appendChild는 안됨.
-                
-                list.append(tr);
-            })
-       
-        }
-    </script>
+		// 등록버튼 클릭.
+		let addBtn = document.getElementById('addBtn');
+		addBtn.addEventListener('click', addMemberFnc)
+		// 서버상에 있는 html, jsp, 서블릿.
+		let xhtp = new XMLHttpRequest();
+		xhtp.open('get', '../MemberListServlet');
+		xhtp.send(); // 서버요청
+		xhtp.onload = function () {
+			let data = JSON.parse(xhtp.response);
+			console.log(data);
+			let list = document.getElementById('list');
+
+			// 서버의 json파일 -> JSON.parse() /파싱/ -> 페이지 출력.
+			data.forEach(data => {
+				let tr = makeTr(data);
+				list.append(tr);
+			})
+		}
+
+		function makeTr(data) {
+			// tr 생성하는 부분.
+			let tr = document.createElement('tr');
+
+			let td = document.createElement('td');
+			let txt = document.createTextNode(data.memberId);
+			td.appendChild(txt); // id
+
+			let td2 = document.createElement('td');
+			let txt2 = document.createTextNode(data.memberName);
+			td2.appendChild(txt2); // first_name
+
+			let td3 = document.createElement('td');
+			let txt3 = document.createTextNode(data.memberPw);
+			td3.appendChild(txt3); // password
+
+			let td4 = document.createElement('td');
+			let btn = document.createElement('button');
+
+			// 삭제 이벤트 : ajax 호출.
+			btn.addEventListener('click', function () {
+				let delAjax = new XMLHttpRequest();
+				delAjax.open('post', '../MemberListServlet') // (요청방식,요청페이지)
+				delAjax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+				delAjax.send('del_id=' + this.parentElement.parentElement.firstElementChild.textContent);
+				delAjax.onload = function (e) {
+					let result = delAjax.responseText;
+					console.log(result);
+					if (result == 'success') {
+						btn.parentElement.parentElement.remove();
+					} else {
+						alert('처리중 에러발생.');
+					}
+				}
+			})
+			// 삭제버튼.
+			let txt4 = document.createTextNode('삭제');
+			btn.appendChild(txt4);
+			td4.appendChild(btn); 
+			
+			// 수정버튼.
+			let td5 = document.createElement('td');
+			let btn2 = document.createElement('button');
+			let txt5 = document.createTextNode('수정');
+			
+			btn2.addEventListener('click', function(){
+				// 수정불가 -> 수정화면으로 변경.
+				let originTr = btn2.parentElement.parentElement;
+				let replaceTr = document.querySelector("#template>tbody>tr").cloneNode(true);
+				// document.querySelector("#template>tbody>tr").cloneNode : 노드 복제
+				let originChild = originTr.children;
+				let replaceChild = replaceTr.children;
+				
+				replaceChild[0].textContent = originChild[0].textContent;
+				replaceChild[1].firstElementChild.value = originChild[1].textContent;
+				replaceChild[2].firstElementChild.value = originChild[2].textContent;
+				
+				replaceTr.setAttribute('id', 'find_' + originChild[0].textContent);
+				
+				// 아이디부분.
+				//replaceTr.firstElementChild.textContent =
+				//	originTr.firstElementChild.textContent;
+				// 이름부분.
+				//replaceTr.firstElementChild.nextSibling.firstElementChild.value =
+				//	originTr.firstElementChild.nextSibling.textContent;
+				// 연락처부분.
+				//replaceTr.firstElementChild.nextSibling.nextSibling.firstElementChild.value =
+				//	originTr.firstElementChild.nextSibling.nextSibling.textContent;
+				
+				let parent = document.getElementById('list'); //tbody
+				parent.replaceChild(replaceTr, originTr);
+			})
+			
+			btn2.appendChild(txt5);
+			td5.appendChild(btn2); 
+			
+			tr.append(td, td2, td3, td4, td5); // append는 한꺼번에 입력 가능, appendChild는 안됨.
+			return tr;
+		}
+
+		// 등록버튼 클릭 실행 콜백함수.
+		function addMemberFnc() {
+			//사용자 값을 읽어와야 함.
+			let id = document.getElementById('mem_id').value; // input값 value.
+			let ps = document.getElementById('mem_pw').value;
+			let nm = document.getElementById('mem_name').value;
+
+			let param = 'mid=' + id + '&mps=' + ps + '&mnm=' + nm; // mid,mps,mnm : 파라미터 이름
+			// let param = 'mem_id='+id+'&mem_pw='+ps+'&mem_name='+nm;
+			let addAjx = new XMLHttpRequest();
+
+			addAjx.open('post', '../addMemberServlet');
+			addAjx.setRequestHeader('Content-type', 'application/x-www-form-urlencoded', 'charset=utf-8');
+			addAjx.send(param); // 서버요청
+			addAjx.onload = addMemberCallback;
+		}
+
+		// 등록 ajax 콜백함수.
+		function addMemberCallback() {
+			let result = JSON.parse(this.responseText);
+			console.log(result);
+			if (result.retCode == 'success') {
+				let list = document.getElementById('list');
+				list.append(makeTr(result));
+			} else if (result.retCode == 'fail') {
+				alert('처리중 에러발생.')
+			}
+		}
+		
+		// 데이터 변경함수
+		function modifyMember(e){
+			let tr = e.target.parentElement.parentElement;
+			let child = tr.children; // [td, td, td, td, td]
+			console.log(child);
+			let id = child[0].textContent;
+			let nm = child[1].firstElementChild.value;
+			let pw = child[2].firstElementChild.value;
+			console.log(id,nm,pw);
+			let param = 'mid='+id+'&mnm='+nm+'&mpw='+pw;
+			
+			let updAjx = new XMLHttpRequest();
+			updAjx.open('post','../updateMemberServlet');
+			updAjx.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+			updAjx.send(param);
+			updAjx.onload = updateMemberCallBack;
+		}
+		
+		// 수정처리 콜백함수.
+		function updateMemberCallBack() {
+			let result = JSON.parse(this.responseText);
+			if (result.retCode == 'success') {
+				alert('성공!')
+				let newTr = makeTr(result);
+				let oldTr = document.getElementById('find_'+result.memberId);
+				
+				document.getElementById('list').replaceChild(newTr, oldTr); // replace(1,2) : 2를 1로 바꿈.
+			} else if (result.retCode == 'fail') {
+				alert('처리중 에러.')
+			}
+		}
+	</script>
 
 </body>
 
