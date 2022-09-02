@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>data_go.html</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        table {
+            width: 70%;
+            float: left;
+            border: 1px solid coral;
+        }
+
+        div#detailInfo {
+            width: 30%;
+            float: left;
+            height: 300px;
+            border: 1px solid coral;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>코로나19 예방접종센터 조회</h3>
+    <label for="center">조회대상입력: <input type="text" name="center" id="center"></label>
+    <button id="searchBtn">조회</button>
+
+    <label for=""> 시도리스트:
+        <select id="sido">
+            <option>선택</option>
+        </select>
+    </label>
+    <br>
+    <table border="1">
+        <thead>
+            <th>시설아이디</th>
+            <th>센터명</th>
+            <th>시도</th>
+            <th>시군수</th>
+            <th>연락처</th>
+            <th>주소</th>
+        </thead>
+        <tbody id="list">
+
+        </tbody>
+    </table>
+    <div id="detailInfo">
+        <ul>
+            <li>org:<span>국립중앙의료원</span></li>
+            <li>lat<span>12.34567</span></li>
+            <li>lng:<span>123.2324</span></li>
+        </ul>
+    </div>
+    <script>
+        // 조회클릭.
+        document.getElementById('searchBtn').addEventListener('click', searchCenterFnc);
+
+        // 리스트선택.
+        document.getElementById('sido').addEventListener('change', searchCenterFnc);
+
+        // 상세정보 조회.
+        document.getElementById('list').addEventListener('mouseover', detailInfoFnc);
+
+
+        // 화면초기화.
+        let gdata;
+
+        let req_url =
+            `https://api.odcloud.kr/api/15077586/v1/centers?page=1&perPage=284&returnType=json&serviceKey=gwegmw3%2B4tBFgcT2K8IBKXcZYvNcmb7p8mVqswS6F1LiHoTkJmanvq5XlXuc3Mskm5AHFkr1egKOzBfm148mag%3D%3D`;
+        let xhtp = new XMLHttpRequest();
+        xhtp.open('get', req_url);
+        xhtp.send();
+        xhtp.onload = pageLoadCallBack;
+
+        ////////////////////////////////////////////////
+
+        function pageLoadCallBack() {
+            let result = JSON.parse(this.responseText);
+
+            let tbody = document.getElementById('list');
+
+            // 결과중에서 result.data가 필요한 실데이터
+            let data = result.data; // 데이타담은것이 함수 안에 있으므로
+            gdata = data; // 밖에서 데이터 선언해주고 담아가기.
+
+            let sidoData = []; // 시도리스트 뿌려주기 위한.
+            let chartData = [];
+
+            data.forEach((center, idx) => {
+                if (idx < 10) {
+                    tbody.append(makeTr(center));
+                }
+                // 시도데이터 구분.
+                if (sidoData.indexOf(center.sido) == -1) { //sido데이터가 없으면
+                    sidoData.push(center.sido);
+                }
+
+                // 차트에 들어갈 데이터 구분. lat: "37.567817" lng: "127.004501" org
+                
+            });
+
+            // select에 option을 달아준다.
+            let sel = document.getElementById('sido');
+            sidoData.forEach(sido => {
+                let opt = document.createElement('option'); // select하위로 option.
+                opt.textContent = sido;
+                opt.value = sido;
+                sel.append(opt);
+            });
+        }
+
+        function makeTr(center) {
+            let tr = document.createElement('tr');
+
+            // 보고싶은 항목.
+            let infos = ['id', 'centerName', 'sido', 'sigungu', 'phoneNumber', 'address'];
+            infos.forEach(info => {
+                let td = document.createElement('td');
+                let txt = document.createTextNode(center[info]); // center.id center.sido
+                td.append(txt);
+                tr.append(td);
+            })
+            return tr;
+
+
+
+        }
+
+        function searchCenterFnc(e) {
+
+            let sido;
+            if (e.target.nodeName == 'BUTTON') {
+                sido = document.getElementById('center').value; // 조회하려는 시도.
+            } else if (e.target.nodeName == 'SELECT') {
+                sido = e.target.value;
+            }
+            let tbody = document.getElementById('list');
+
+            // 이미 있던 tr 삭제.
+            document.querySelectorAll('#list>tr').forEach(tr => tr.remove());
+
+            // 추가로 그려주는 부분.
+            gdata.forEach(center => {
+                if (center.sido.startsWith(sido)) { // sido와 똑같은 조회조건이 있으면~
+                    tbody.append(makeTr(center)); // 조회된 시도 정보.
+                }
+            });
+        }
+
+        function detailInfoFnc(){
+            // 차트에 들어갈 데이터 구분. (lat/ lng/ org)
+            let ul = document.createElement('ul');
+        }
+    </script>
+</body>
+
+</html>
