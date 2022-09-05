@@ -25,7 +25,7 @@ public class BoardDAO extends DAO {
 				board.setTitle(rs.getString("title"));
 				board.setContent(rs.getString("content"));
 				board.setWriter(rs.getString("writer"));
-				board.setCreationDate(rs.getDate("creation_date"));
+				board.setCreationDate(rs.getString("creation_date"));
 				
 				list.add(board);
 			}
@@ -63,7 +63,7 @@ public class BoardDAO extends DAO {
 			pstmt.setString(2, board.getTitle());
 			pstmt.setString(3, board.getContent());
 			pstmt.setString(4, board.getWriter());
-			pstmt.setDate(5, board.getCreationDate());
+			pstmt.setString(5, board.getCreationDate());
 			
 			int result = pstmt.executeUpdate();
 			if(result > 0)
