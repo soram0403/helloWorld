@@ -23,7 +23,15 @@
             height: 300px;
             border: 1px solid coral;
         }
+
+        div#piechart {
+            clear: both;
+        }
+        tr:hover {
+            font-weight: bold;
+        }
     </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 
 <body>
@@ -52,11 +60,11 @@
     </table>
     <div id="detailInfo">
         <ul>
-            <li>org:<span>국립중앙의료원</span></li>
-            <li>lat<span>12.34567</span></li>
-            <li>lng:<span>123.2324</span></li>
+          
         </ul>
     </div>
+    <div id="piechart" style="width: 700px; height:400px"></div>
+
     <script>
         // 조회클릭.
         document.getElementById('searchBtn').addEventListener('click', searchCenterFnc);
@@ -87,10 +95,11 @@
 
             // 결과중에서 result.data가 필요한 실데이터
             let data = result.data; // 데이타담은것이 함수 안에 있으므로
+            console.log(data);
             gdata = data; // 밖에서 데이터 선언해주고 담아가기.
 
             let sidoData = []; // 시도리스트 뿌려주기 위한.
-            let chartData = [];
+            let chartData = []; // [['서울특별시',3],['대전광역시',2],['경기도',3],[]]
 
             data.forEach((center, idx) => {
                 if (idx < 10) {
@@ -102,8 +111,17 @@
                 }
 
                 // 차트에 들어갈 데이터 구분. lat: "37.567817" lng: "127.004501" org
-                
+                // 시도(서울특별시, 대전광역시) chartData.push(['서울특별시',1])
+                // ['서울특별시',2] -> 숫자 누적
+                let dChart = chartData.find(chart => chart[0] == center
+                    .sido); // 조건을 만족하는 것 반환, 없으면 undefined 반환
+                if (dChart) { // 값이 있으면...
+                    dChart[1]++;
+                } else { // 값이 없으면...
+                    chartData.push([center.sido, 1])
+                }
             });
+            makeChart();
 
             // select에 option을 달아준다.
             let sel = document.getElementById('sido');
@@ -113,7 +131,30 @@
                 opt.value = sido;
                 sel.append(opt);
             });
-        }
+
+            function makeChart() {
+
+                google.charts.load('current', {
+                    'packages': ['corechart']
+                });
+                google.charts.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+                    chartData.unshift(['시도', '건수']); // 첫번째 위치에 array 넣어주기.
+                    // google.visualization.arrayToDataTable()의 첫번째 위치엔
+                    // ['Task', 'Hours per Day'] column의 주제 array의 형태로 와야함.
+                    var data = google.visualization.arrayToDataTable(chartData);
+
+                    var options = {
+                        title: '코로나19 센터 시도별 현황'
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                    chart.draw(data, options);
+                }
+            }
+        } // end of pageLoadCallBack
 
         function makeTr(center) {
             let tr = document.createElement('tr');
@@ -153,10 +194,42 @@
             });
         }
 
-        function detailInfoFnc(){
+        function detailInfoFnc() {
             // 차트에 들어갈 데이터 구분. (lat/ lng/ org)
             let ul = document.createElement('ul');
+            let infos = [gdata.lat,gdata.lng,gdata.org];
+            infos.forEach(info=>{
+                let li = document.createElement('li');
+                let div = document.getElementById('detailInfo');
+                ul.append(li);
+                div.append(ul);
+            })
+            // return div;
         }
+    //     <div id="detailInfo">
+    //     <ul>
+    //         <li>org:<span>국립중앙의료원</span></li>
+    //         <li>lat<span>12.34567</span></li>
+    //         <li>lng:<span>123.2324</span></li>
+    //     </ul>
+    // </div>
+        // function makeTr(center) {
+        //     let tr = document.createElement('tr');
+
+        //     // 보고싶은 항목.
+        //     let infos = ['id', 'centerName', 'sido', 'sigungu', 'phoneNumber', 'address'];
+        //     infos.forEach(info => {
+        //         let td = document.createElement('td');
+        //         let txt = document.createTextNode(center[info]); // center.id center.sido
+        //         td.append(txt);
+        //         tr.append(td);
+        //     })
+        //     return tr;
+
+
+
+        // }
+
     </script>
 </body>
 
