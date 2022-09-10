@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit</title>
+</head>
+
+<body>
+    <script>
+        function Fruit(name, price) {
+            this.name = name;
+            this.price = price;
+            this.print = function () { 
+                return `과일의 이름은 ${this.name}, 가격은 ${this.price}원 입니다.`;
+            }
+        }
+        let fruits = [new Fruit('오렌지', 1000),
+                      new Fruit('사과', 1500),
+                      new Fruit('귤', 2000),
+                      new Fruit('망고', 2500),
+                      new Fruit('수박', 3000),
+                     ];
+        
+        // for(let i = 0; i<fruits.length; i++){
+        //     if(fruits[i].price >=2000){
+        //         console.log( fruits[i].print());
+        //     }
+        // }
+        
+        fruits.forEach(findFruit);
+
+        function findFruit(fruits) {
+            if(fruits.price >= 2000) {
+              console.log(fruits.print());
+            }
+        }
+    </script>
+</body>
+
+</html>
