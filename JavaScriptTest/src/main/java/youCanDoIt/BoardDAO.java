@@ -7,7 +7,8 @@ import java.util.List;
 public class BoardDAO extends DAO {
 
 	public List<Board> getBoardList() {
-		String sql = "select * from tbl_board";
+		String sql = "select bno, title, content, writer, to_char(creation_date, 'yyyy-mm-dd')as creation_date \r\n"
+				+ "from tbl_board";
 		List<Board> list = new ArrayList<>();
 		
 		conn();
@@ -55,15 +56,15 @@ public class BoardDAO extends DAO {
 	
 	// 입력
 	public boolean insertBoard(Board board) {
-		String sql = "insert into tbl_board values(?, ?, ?, ?, ?)";
+		String sql = "insert into tbl_board (bno, title, content, writer, creation_date) values(seq_board.nextval, ?, ?, ?, sysdate)";
 		conn();
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, board.getBno());
-			pstmt.setString(2, board.getTitle());
-			pstmt.setString(3, board.getContent());
-			pstmt.setString(4, board.getWriter());
-			pstmt.setString(5, board.getCreationDate());
+			//pstmt.setInt(1, board.getBno());
+			pstmt.setString(1, board.getTitle());
+			pstmt.setString(2, board.getContent());
+			pstmt.setString(3, board.getWriter());
+			//pstmt.setString(4, board.getCreationDate());
 			
 			int result = pstmt.executeUpdate();
 			if(result > 0)

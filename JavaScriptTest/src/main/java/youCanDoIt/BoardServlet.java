@@ -52,17 +52,15 @@ public class BoardServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/json;charset=utf-8");
-		response.setCharacterEncoding("utf-8");
 
 		// 추가, 삭제의 기능을 구현.
 		String job = request.getParameter("job");
 		if (job.equals("insert")) {
 			Board board = new Board();
-			board.setBno(Integer.parseInt(request.getParameter("bno")));
-			board.setTitle("title");
-			board.setContent("content");
-			board.setWriter("writer");
+			// board.setBno(Integer.parseInt(request.getParameter("bno")));
+			board.setTitle(request.getParameter("title"));
+			board.setContent(request.getParameter("content"));
+			board.setWriter(request.getParameter("writer"));
 			board.setCreationDate("creation_date");
 			BoardDAO dao = new BoardDAO();
 			if (dao.insertBoard(board)) {
@@ -72,7 +70,7 @@ public class BoardServlet extends HttpServlet {
 			}
 			;
 			// int age = Integer.parseInt(request.getParameter("age"));
-		} else if (job.equals("deleter")) {
+		} else if (job.equals("delete")) {
 			int bno = Integer.parseInt(request.getParameter("bno"));
 			BoardDAO dao = new BoardDAO();
 			if (dao.deleteBoard(bno)) {

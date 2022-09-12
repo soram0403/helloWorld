@@ -27,6 +27,7 @@
         div#piechart {
             clear: both;
         }
+
         tr:hover {
             font-weight: bold;
         }
@@ -60,7 +61,10 @@
     </table>
     <div id="detailInfo">
         <ul>
-          
+            <li>
+                <span></span>
+            </li>
+
         </ul>
     </div>
     <div id="piechart" style="width: 700px; height:400px"></div>
@@ -72,8 +76,8 @@
         // 리스트선택.
         document.getElementById('sido').addEventListener('change', searchCenterFnc);
 
-        // 상세정보 조회.
-        document.getElementById('list').addEventListener('mouseover', detailInfoFnc);
+        // // 상세정보 조회.
+        // document.getElementById('list').addEventListener('mouseover', detailInfoFnc);
 
 
         // 화면초기화.
@@ -167,11 +171,28 @@
                 td.append(txt);
                 tr.append(td);
             })
+
             return tr;
-
-
-
         }
+        // 마우스 올라가면 해당 org, lat, lng를 #detailInfo>ul>li>span 에 띄우기
+        tr.addEventListener('mouseover', function () {
+            let props = ['org', 'lat', 'lng'];
+            console.log(center);
+            props.forEach((prop, idx) => {
+                let detailInfo = document.querySelectorAll('#detailInfo>ul>li>span');
+                detailInfo[idx].textContent = center[prop] != '' ? center[prop] : '없음';
+            });
+
+        });
+        // 마우스가 벗어나면 해당 org, lat, lng를 #detailInfo>ul>li>span 비워주기
+        tr.addEventListener('mouseout', function () {
+            let detailInfo = document.querySelectorAll('#detailInfo>ul>li>span');
+
+            detailInfo[0].textContent = '';
+            detailInfo[1].textContent = '';
+            detailInfo[2].textContent = '';
+        });
+
 
         function searchCenterFnc(e) {
 
@@ -194,25 +215,25 @@
             });
         }
 
-        function detailInfoFnc() {
-            // 차트에 들어갈 데이터 구분. (lat/ lng/ org)
-            let ul = document.createElement('ul');
-            let infos = [gdata.lat,gdata.lng,gdata.org];
-            infos.forEach(info=>{
-                let li = document.createElement('li');
-                let div = document.getElementById('detailInfo');
-                ul.append(li);
-                div.append(ul);
-            })
-            // return div;
-        }
-    //     <div id="detailInfo">
-    //     <ul>
-    //         <li>org:<span>국립중앙의료원</span></li>
-    //         <li>lat<span>12.34567</span></li>
-    //         <li>lng:<span>123.2324</span></li>
-    //     </ul>
-    // </div>
+        // function detailInfoFnc() {
+        //     // 차트에 들어갈 데이터 구분. (lat/ lng/ org)
+        //     let ul = document.createElement('ul');
+        //     let infos = [gdata.lat,gdata.lng,gdata.org];
+        //     infos.forEach(info=>{
+        //         let li = document.createElement('li');
+        //         let div = document.getElementById('detailInfo');
+        //         ul.append(li);
+        //         div.append(ul);
+        //     })
+        //     // return div;
+        // }
+        //     <div id="detailInfo">
+        //     <ul>
+        //         <li>org:<span>국립중앙의료원</span></li>
+        //         <li>lat<span>12.34567</span></li>
+        //         <li>lng:<span>123.2324</span></li>
+        //     </ul>
+        // </div>
         // function makeTr(center) {
         //     let tr = document.createElement('tr');
 
@@ -229,7 +250,6 @@
 
 
         // }
-
     </script>
 </body>
 
